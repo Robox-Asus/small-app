@@ -1,0 +1,74 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+      <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-10 text-center">
+        
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6">
+          <h1 class="text-3xl md:text-4xl font-extrabold text-indigo-700">Simple Angular App</h1>
+          <button
+            (click)="isLoggedIn() ? logout() : login()"
+            class="px-4 py-2 rounded-full font-semibold text-white transition-all duration-300 transform hover:scale-105"
+            [ngClass]="isLoggedIn() ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'"
+          >
+            {{ isLoggedIn() ? 'Logout' : 'Login' }}
+          </button>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="w-full">
+          @if (!isLoggedIn()) {
+            <!-- Login Page -->
+            <div class="space-y-4">
+              <h2 class="text-2xl font-bold text-gray-800">Welcome! Please Log In</h2>
+              <p class="text-gray-600">Click the 'Login' button above to get started.</p>
+            </div>
+          } @else {
+            <!-- Logged-in Pages Container -->
+            <div>
+              @switch (currentPage()) {
+                @case ('home') {
+                  <div class="space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Home Page</h2>
+                    <p class="text-gray-600">You are logged in. Select a page to view its content.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                      <button (click)="goToPage('page1')" class="bg-blue-500 hover:bg-blue-600 transition-colors text-white py-4 px-6 rounded-xl font-bold shadow-md hover:shadow-lg transform hover:-translate-y-1">Page One</button>
+                      <button (click)="goToPage('page2')" class="bg-blue-500 hover:bg-blue-600 transition-colors text-white py-4 px-6 rounded-xl font-bold shadow-md hover:shadow-lg transform hover:-translate-y-1">Page Two</button>
+                      <button (click)="goToPage('page3')" class="bg-blue-500 hover:bg-blue-600 transition-colors text-white py-4 px-6 rounded-xl font-bold shadow-md hover:shadow-lg transform hover:-translate-y-1">Page Three</button>
+                      <button (click)="goToPage('page4')" class="bg-blue-500 hover:bg-blue-600 transition-colors text-white py-4 px-6 rounded-xl font-bold shadow-md hover:shadow-lg transform hover:-translate-y-1">Page Four</button>
+                    </div>
+                  </div>
+                }
+                @case ('page1') {
+                  <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Page One Content</h2>
+                    <p class="text-gray-600">This is the content for the first page. It could be a user dashboard, a product list, or any other component.</p>
+                    <button (click)="goToPage('home')" class="mt-4 px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full font-semibold transition-colors">Go Back to Home</button>
+                  </div>
+                }
+                @case ('page2') {
+                  <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Page Two Content</h2>
+                    <p class="text-gray-600">This is the content for the second page. Feel free to add forms, charts, or other interactive elements here.</p>
+                    <button (click)="goToPage('home')" class="mt-4 px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full font-semibold transition-colors">Go Back to Home</button>
+                  </div>
+                }
+                @case ('page3') {
+                  <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Page Three Content</h2>
+                    <p class="text-gray-600">This page can be used for a blog, an article, or any detailed information you want to display.</p>
+                    <button (click)="goToPage('home')" class="mt-4 px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full font-semibold transition-colors">Go Back to Home</button>
+                  </div>
+                }
+                @case ('page4') {
+                  <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Page Four Content</h2>
+                    <p class="text-gray-600">The fourth page is here. You can connect it to a service to fetch data or perform actions.</p>
+                    <button (click)="goToPage('home')" class="mt-4 px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full font-semibold transition-colors">Go Back to Home</button>
+                  </div>
+                }
+              }
+            </div>
+          }
+        </main>
+      </div>
+    </div>
